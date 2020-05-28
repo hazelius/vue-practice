@@ -1,9 +1,41 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hello World</title>
-  </head>
-  <body>
-    <!--- TODO: "Hello World" を表示する --->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Hello World</title>
+</head>
+
+<body>
+  <div id="demo">
+    <input v-model="hello">
+    <div class="result">入力:{{hello}}</div>
+    <div>フィルタ：{{hello | filterHello}}</div>
+  </div>
+
+  <div id="app">{{ message }}</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#demo',
+      data: {
+        hello: ''
+      },
+      filters: {
+        filterHello: function (d) {
+          let buf = (d + '0000000').slice(0, 7);
+          return isNaN(buf) ? '半角数字で入力してください' : buf.toString()
+        }
+      }
+    });
+
+    const apps = new Vue({
+      el: '#app',
+      data: {
+        message: 'text'
+      }
+    })
+  </script>
+</body>
+
 </html>
